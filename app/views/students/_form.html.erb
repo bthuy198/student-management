@@ -1,0 +1,47 @@
+<%= form_with model: student do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, "Student's Name", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :phone, "Phone", class: "form-label" %>
+    <%= form.text_field :phone, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :address, "Address", class: "form-label" %>
+    <%= form.text_field :address, class: "form-control" %>
+  </div>
+  <%= form.fields_for :grades do |grade| %>
+  <div class="row grade-container">
+    <div class="col">
+      <%= grade.label :subject, "Subject", class: "form-label" %>
+      <%= grade.text_field :subject, class: "form-control street-field" %>
+    </div>
+    <div class="col">
+      <%= grade.label :score, "Score", class: "form-label" %>
+      <%= grade.text_field :score, class: "form-control street-field" %>
+    </div>
+    <div class="col">
+      <%= grade.label :semester, "Semester", class: "form-label" %>
+      <%= grade.text_field :semester, class: "form-control street-field" %>
+    </div>
+    <div class="col">
+      <%= grade.label :comments, "Comments", class: "form-label" %>
+      <%= grade.text_field :comments, class: "form-control street-field" %>
+    </div>
+    </div>
+    <div>
+      <button type="button" class="js-btn-add btn btn-outline-primary">Add grade</button>
+    </div>
+  <% end %>
+  <%= form.submit "Create New Student", class: "btn btn-primary"%>
+<% end %>
+
+<%= javascript_include_tag "student" %>
+
+<style type="text/css">
+  .street-field {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+</style>

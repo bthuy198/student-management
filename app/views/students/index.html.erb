@@ -1,0 +1,32 @@
+<div class="container">
+<h1>Listing Students</h1>
+<button class="btn btn-outline-primary"><%= link_to "Create new student", new_student_path %></button>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @students.each do |student| %>
+    <tr>
+      <td><%= student.id %></td>
+      <td><%= student.name %></td>
+      <td><%= student.phone %></td>
+      <td><%= student.address %></td>
+      <td><%= link_to "Show", student %></td>
+      <td><%= link_to "Edit", edit_student_path(student) %></td>
+      <td><%= link_to "Delete", student, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+</div>
+
+<style type="text/css">
+  
+</style>

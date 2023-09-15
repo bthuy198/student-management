@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Students: <%= @student.name %></h1>
-  <%= form_with model: @student, url: student_path(@student), method: :patch, local: true do |form| %>
+  <%= form_for @student, url: student_path(@student), method: :patch, local: true do |form| %>
     <div class="mb-3">
     <%= form.label :name, "Student's Name", class: "form-label" %>
     <%= form.text_field :name, class: "form-control" %>
@@ -13,7 +13,26 @@
     <%= form.label :address, "Address", class: "form-label" %>
     <%= form.text_field :address, class: "form-control" %>
   </div>
-  
+  <% @student.grades.each do |g| %>
+    <div class="row grade-container mb-3">
+      <div class="col">
+        <label for="subject">Subject</label>
+        <input id="subject" class="form-control street-field" value="<%= g.subject %>">
+      </div>
+      <div class="col">
+        <label for="score">Score</label>
+        <input id="score" class="form-control street-field" value="<%= g.score %>">
+      </div>
+      <div class="col">
+        <label for="semester">Semester</label>
+        <input id="semester" class="form-control street-field" value="<%= g.semester %>">
+      </div>
+      <div class="col">
+        <label for="comments">Comment</label>
+        <input id="comments" class="form-control street-field" value="<%= g.comments %>">
+      </div>
+    </div>
+  <% end %>
     <%= form.submit "Update Student", class: "btn btn-primary" %>
 <% end %>
 </div>

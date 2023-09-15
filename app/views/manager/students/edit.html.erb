@@ -1,0 +1,50 @@
+<div class="container">
+<h1>Edit Student</h1>
+<%= form_with model: @student, url: manager_student_path(@student), method: :patch, local: true do |form| %>
+    <div class="mb-3">
+    <%= form.label :name, "Student's Name", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :phone, "Phone", class: "form-label" %>
+    <%= form.text_field :phone, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :address, "Address", class: "form-label" %>
+    <%= form.text_field :address, class: "form-control" %>
+  </div>
+    <div class="mb-3">
+      <%= form.label :avatar, "Avatar", class: "form-label" %>
+      <%= form.file_field :avatar, class: "form-control"%>
+    </div>
+    <div class="mb-3">
+      <%= form.label :video, "Video", class: "form-label" %>
+      <%= form.file_field :video, class: "form-control"%>
+    </div>
+    <div class="mb-3">
+      <%= form.label :audio, "Audio", class: "form-label" %>
+      <%= form.file_field :audio, class: "form-control"%>
+    </div>
+  <%= fields_for :grades do |grade| %>
+    <div class="row grade-container">
+      <div class="col">
+        <%= grade.label :subject, "Subject", class: "form-label" %>
+        <%= grade.text_field :subject, class: "form-control street-field" %>
+      </div>
+      <div class="col">
+        <%= grade.label :score, "Score", class: "form-label" %>
+        <%= grade.text_field :score, class: "form-control street-field" %>
+      </div>
+      <div class="col">
+        <%= grade.label :semester, "Semester", class: "form-label" %>
+        <%= grade.text_field :semester, class: "form-control street-field" %>
+      </div>
+      <div class="col">
+        <%= grade.label :comments, "Comments", class: "form-label" %>
+        <%= grade.text_field :comments, class: "form-control street-field" %>
+      </div>
+    </div>
+  <% end %>
+    <%= form.submit "Update Student", class: "btn btn-primary" %>
+<% end %>
+</div>

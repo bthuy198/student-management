@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-module Manager
+module Admin
   # student controller class
-  class StudentsController < UserPagesController
+  class StudentsController < AdminsController
     def index
-      @students = if params[:key]
-                    Student.without_deleted.where('name like ?', "%#{params[:key]}%").all.page params[:page]
-                  else
-                    Student.all.page params[:page]
-                  end
+      @students = @students = if params[:key]
+                                Student.where('name like ?', "%#{params[:key]}%").all.page params[:page]
+                              else
+                                Student.all.page params[:page]
+                              end
       # current_page = params[:page].to_f.ceil || 1
       # start = @@result_per_page * (current_page - 1)
       # @students = Student.search_by_name(params[:key]).offset(start).limit(current_page)
@@ -19,8 +19,7 @@ module Manager
     end
 
     def show
-      @student = Student.without_deleted.find(params[:id])
-
+      @student = Student.find(params[:id])
       if @student.present?
         flash[:success] = 'Created success!'
       else
@@ -36,6 +35,7 @@ module Manager
 
     def create
       @student = Student.new student_params
+      puts @student
       if @student.save
         flash[:success] = 'Created success!'
         redirect_to root_path
@@ -47,9 +47,9 @@ module Manager
 
     def update
       @student = Student.find(params[:id])
-      # @grade = Grade.find_by(student_id: params[:id])
+      @grade = Grade.find_by(student_id: params[:id])
       respond_to do |format|
-        if @student.update!(student_params)
+        if @student.update(update_params)
           format.html { redirect_to edit_manager_student_url(@student), notice: 'Student was successfully updated.' }
           format.json { render :edit, status: :ok, location: @student }
         else
@@ -84,30 +84,16 @@ module Manager
       @student = Student.find(params[:id]).to_json
     end
 
-    def destroyed
-      @students = Student.only_deleted
-    end
-
-    def restore_student
-      @student = Student.only_deleted.find(params[:id])
-      @student.restore
-      # redirect_to manager_students_url
-    end
-
     private
 
     def student_params
       params.require(:student).permit(:name, :phone, :address, :avatar, :video, :audio,
-                                      grades_attributes: %i[id subject score semester comments])
+                                      grades_attributes: %i[subject score semester comments _destroy])
     end
 
     def update_params
       params.require(:student).permit(:name, :phone, :address, :avatar, :video, :audio,
-                                      grades_attributes: %i[id subject score semester comments])
-    end
-
-    def delete_params
-      params.permit(:id)
+                                      grades_attributes: %i[subject score semester comments])
     end
   end
 end

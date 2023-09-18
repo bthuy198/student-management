@@ -25,7 +25,7 @@
       <%= form.label :audio, "Audio", class: "form-label" %>
       <%= form.file_field :audio, class: "form-control"%>
     </div>
-  <%= fields_for :grades do |grade| %>
+  <%= form.fields_for :grades do |grade| %>
     <div class="row grade-container">
       <div class="col">
         <%= grade.label :subject, "Subject", class: "form-label" %>

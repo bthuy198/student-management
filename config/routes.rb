@@ -32,16 +32,15 @@ Rails.application.routes.draw do
     # get '/students/:id', to: 'students#show'
     get '/students/search', to: 'students#search'
     post '/students/create', to: 'students#create'
-    get '/students/:id/edit', to: 'students#edit'
-    patch 'students/:id', to: 'students#update'
     delete '/students/:id', to: 'students#destroy'
     get 'students/destroyed', to: 'students#destroyed'
     get 'students/:id/destroyed', to: 'students#restore_student'
     resources :students
-    # resources :grades, only: %i[show index edit update destroy new]
     resources :students do
       member do
         get :preview
+        put :restore
+        delete :really_delete
       end
     end
   end

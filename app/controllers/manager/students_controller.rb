@@ -5,13 +5,12 @@ module Manager
   class StudentsController < UserPagesController
     def index
       @students = if params[:key]
-                    Student.without_deleted.where('name like ?', "%#{params[:key]}%").all.page params[:page]
+                    Student.without_deleted.where('concat(firstname, " ", lastname) like ?',
+                                                  "%#{params[:key]}%").or(Student.without_deleted.where('concat(lastname, " ", firstname) like ?',
+                                                                                                        "%#{params[:key]}%")).all.page params[:page]
                   else
-                    Student.all.page params[:page]
+                    Student.without_deleted.page params[:page]
                   end
-      # current_page = params[:page].to_f.ceil || 1
-      # start = @@result_per_page * (current_page - 1)
-      # @students = Student.search_by_name(params[:key]).offset(start).limit(current_page)
     end
 
     def search_params
@@ -40,7 +39,7 @@ module Manager
         flash[:success] = 'Created success!'
         redirect_to root_path
       else
-        # flash[:error] = 'Created failed!'
+        flash[:error] = 'Created failed!'
         render :new
       end
     end
@@ -57,14 +56,6 @@ module Manager
           format.json { render json: @student.errors, status: :unprocessable_entity }
         end
       end
-      # @student = Student.find(params[:id])
-      # if @student.update student_params
-      #   flash[:success] = "Student successfully updated!"
-      #   redirect_to(@student)
-      # else
-      #   flash.now[:error] = "To-do item update failed"
-      #   render :edit
-      # end
     end
 
     def edit
@@ -88,10 +79,16 @@ module Manager
       @students = Student.only_deleted
     end
 
-    def restore_student
+    def restore
       @student = Student.only_deleted.find(params[:id])
-      @student.restore
-      # redirect_to manager_students_url
+      @student.restore(recursive: true)
+      redirect_to manager_students_destroyed_path
+    end
+
+    def really_delete
+      @student = Student.only_deleted.find(params[:id])
+      @student.really_destroy!
+      redirect_to manager_students_destroyed_path
     end
 
     private

@@ -1,9 +1,13 @@
 <div class="container">
-  <h1>Students: <%= @student.name %></h1>
+  <h1>Students: <%= @student.firstname + " " + @student.lastname %></h1>
   <%= form_for @student, url: manager_student_path(@student), method: :patch, local: true do |form| %>
-    <div class="mb-3">
-    <%= form.label :name, "Student's Name", class: "form-label" %>
-    <%= form.text_field :name, class: "form-control" %>
+  <div class="mb-3">
+    <%= form.label :firstname, "First Name", class: "form-label" %>
+    <%= form.text_field :firstname, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :lastname, "Last Name", class: "form-label" %>
+    <%= form.text_field :lastname, class: "form-control" %>
   </div>
   <div class="mb-3">
     <%= form.label :phone, "Phone", class: "form-label" %>

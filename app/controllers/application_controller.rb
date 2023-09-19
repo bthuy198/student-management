@@ -6,4 +6,12 @@ class ApplicationController < ActionController::Base
   # def after_sign_in_path_for(_resouce)
   #   userpage_path
   # end
+  # before_action :configure_permitted_parameters, if: :admin_
+  #
+  # protected
+  #
+  # def configure_permitted_parameters
+  #   devise_parameter_sanitizer.for(:sign_up).push(:firstname, :lastname, :email, :password)
+  #   devise_parameter_sanitizer.for(:account_update).push(:firstname, :lastname, :email, :password)
+  # end
 end

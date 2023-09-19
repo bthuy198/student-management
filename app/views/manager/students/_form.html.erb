@@ -8,8 +8,12 @@
     </ul>
   <% end %>
   <div class="mb-3">
-    <%= form.label :name, "Student's Name", class: "form-label" %>
-    <%= form.text_field :name, class: "form-control" %>
+    <%= form.label :firstname, "First Name", class: "form-label" %>
+    <%= form.text_field :firstname, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :lastname, "Last Name", class: "form-label" %>
+    <%= form.text_field :lastname, class: "form-control" %>
   </div>
   <div class="mb-3">
     <%= form.label :phone, "Phone", class: "form-label" %>

@@ -5,7 +5,7 @@
       <%= button_to "Create new student", new_manager_student_path, method: :get, class: "btn btn-outline-primary" %>
     </div>
     <div class="col-4">
-      <%= button_to "Destroyed List", manager_students_destroyed_path, method: :get, class: "btn btn-outline-primary" %>
+      <%= button_to "Destroyed List", destroyed_manager_students_path, method: :get, class: "btn btn-outline-primary" %>
     </div>
     <div class="col-4">
         <%= form_tag(manager_students_path, method: :get, class: "input-group") do %>
@@ -29,10 +29,13 @@
 <table class="table">
   <thead>
     <tr>
+      <th scope="col" colspan="2"></th>
       <th scope="col" >#</th>
       <th scope="col">ID</th>
       <th scope="col">Avatar</th>
       <th scope="col">Full Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Birthday</th>
       <th scope="col">Phone</th>
       <th scope="col">Address</th>
       <th scope="col" colspan="4" class="text-center">Action</th>
@@ -41,10 +44,14 @@
   <tbody>
     <% @students.each.with_index(1) do |student, index| %>
     <tr>
+      <td><button type="button" class="btn btn-success">&#8595;</button></td>
+      <td><button type="button" class="btn btn-success">&#8593;</button></td>
       <td><%= index%></td>
       <td><%= student.id %></td>
       <td><%= image_tag student.avatar.url.to_s, width: 70, height: 70, alt: "Avatar" %></td>
       <td><%= student.firstname + " " + student.lastname %></td>
+      <td><%= student.email %></td>
+      <td><%= student.birthday %></td>
       <td><%= student.phone %></td>
       <td><%= student.address %></td>
       <td><%= link_to "Show", manager_student_path(student) %></td>

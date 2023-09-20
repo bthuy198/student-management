@@ -2,7 +2,7 @@
 
 module Manager
   # student controller class
-  class StudentsController < UserPagesController
+  class StudentsController < UsersController
     def index
       @students = if params[:key]
                     Student.without_deleted.where('concat(firstname, " ", lastname) like ?',
@@ -11,10 +11,8 @@ module Manager
                   else
                     Student.without_deleted.page params[:page]
                   end
-    end
-
-    def search_params
-      params.permit(:key, :page)
+      # service = PositionService.new(list)
+      # @students = service.change_position(-1)
     end
 
     def show
@@ -31,16 +29,20 @@ module Manager
       @student = Student.new
       @student.grades.build
       @student.avatar = params[:file]
+      # logging
+      Rails.logger.info 'New student accessed'
     end
 
     def create
       @student = Student.new student_params
       if @student.save
         flash[:success] = 'Created success!'
-        redirect_to root_path
+        redirect_to new_manager_student_path
+        UserMailer.with(student_params).welcome_email.deliver_later
       else
         flash[:error] = 'Created failed!'
         render :new
+        # redirect_to new_manager_student_path
       end
     end
 
@@ -82,24 +84,24 @@ module Manager
     def restore
       @student = Student.only_deleted.find(params[:id])
       @student.restore(recursive: true)
-      redirect_to manager_students_destroyed_path
+      redirect_to destroyed_manager_students_path
     end
 
     def really_delete
       @student = Student.only_deleted.find(params[:id])
       @student.really_destroy!
-      redirect_to manager_students_destroyed_path
+      redirect_to destroyed_manager_students_path
     end
 
     private
 
     def student_params
-      params.require(:student).permit(:name, :phone, :address, :avatar, :video, :audio,
+      params.require(:student).permit(:firstname, :lastname, :phone, :address, :avatar, :video, :audio,
                                       grades_attributes: %i[id subject score semester comments])
     end
 
     def update_params
-      params.require(:student).permit(:name, :phone, :address, :avatar, :video, :audio,
+      params.require(:student).permit(:firstname, :lastname, :phone, :address, :avatar, :video, :audio,
                                       grades_attributes: %i[id subject score semester comments])
     end
 

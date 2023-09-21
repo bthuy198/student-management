@@ -11,14 +11,13 @@ Rails.application.routes.draw do
   namespace :manager do
     devise_for :users
     resources :students do
-      resources :grades
       member do
         get :preview
         put :restore
         delete :really_delete
       end
       collection do
-        get :search
+        # match 'search' => 'students#search', via: %i[get post], as: :search
         get :destroyed
       end
     end

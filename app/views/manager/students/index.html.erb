@@ -8,19 +8,22 @@
       <%= button_to "Destroyed List", destroyed_manager_students_path, method: :get, class: "btn btn-outline-primary" %>
     </div>
     <div class="col-4">
-        <%= form_tag(manager_students_path, method: :get, class: "input-group") do %>
-          <%= text_field_tag :key, params[:key], class: "form-control rounded", placeholder: "Search" %>
-          <%= submit_tag 'Search', class: "btn btn-outline-primary" %>
-        <% end %>
+      <%= search_form_for @q, url: manager_students_path, class: "input-group" do |f| %>
+        <%= f.search_field :firstname_or_lastname_cont, class: "form-control rounded", placeholder: "Search" %>
+        <%= f.submit 'Search', class: "btn btn-outline-primary" %>
+      <% end %>
+        <%#= form_tag(manager_students_path, method: :get, class: "input-group") do %>
+          <%#= text_field_tag :key, params[:key], class: "form-control rounded", placeholder: "Search" %>
+          <%#= submit_tag 'Search', class: "btn btn-outline-primary" %>
+        <%# end %>
     </div>
     <div class="col-2">
-      <!-- Example single danger button -->
       <div class="btn-group">
         <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           Filter
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Order by name DESC</a></li>
+          <li><a class="dropdown-item" href="#">Order by name DESC </a></li>
           <li><a class="dropdown-item" href="#">Order by name ASC</a></li>
         </ul>
       </div>
@@ -29,10 +32,10 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col" colspan="2"></th>
+<!--      <th scope="col" colspan="2"></th>-->
       <th scope="col" >#</th>
-      <th scope="col">ID</th>
-      <th scope="col">Avatar</th>
+      <th scope="col">ID </th>
+      <th scope="col"> Avatar </th>
       <th scope="col">Full Name</th>
       <th scope="col">Email</th>
       <th scope="col">Birthday</th>
@@ -44,8 +47,8 @@
   <tbody>
     <% @students.each.with_index(1) do |student, index| %>
     <tr>
-      <td><button type="button" class="btn btn-success">&#8595;</button></td>
-      <td><button type="button" class="btn btn-success">&#8593;</button></td>
+<!--      <td><button type="button" class="btn btn-success">&#8595;</button></td>-->
+<!--      <td><button type="button" class="btn btn-success">&#8593;</button></td>-->
       <td><%= index%></td>
       <td><%= student.id %></td>
       <td><%= image_tag student.avatar.url.to_s, width: 70, height: 70, alt: "Avatar" %></td>

@@ -4,15 +4,15 @@ module Manager
   # student controller class
   class StudentsController < UsersController
     def index
-      @students = if params[:key]
-                    Student.without_deleted.where('concat(firstname, " ", lastname) like ?',
-                                                  "%#{params[:key]}%").or(Student.without_deleted.where('concat(lastname, " ", firstname) like ?',
-                                                                                                        "%#{params[:key]}%")).all.page params[:page]
-                  else
-                    Student.without_deleted.page params[:page]
-                  end
-      # service = PositionService.new(list)
-      # @students = service.change_position(-1)
+      @q = Student.ransack(params[:q])
+      @students = @q.result.page(params[:page])
+      # @students = if params[:key]
+      #               Student.without_deleted.where('concat(firstname, " ", lastname) like ?',
+      #                                             "%#{params[:key]}%").or(Student.without_deleted.where('concat(lastname, " ", firstname) like ?',
+      #                                                                                                   "%#{params[:key]}%")).all.page params[:page]
+      #             else
+      #               Student.without_deleted.page params[:page]
+      #             end
     end
 
     def show

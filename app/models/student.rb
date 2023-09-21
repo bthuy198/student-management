@@ -12,4 +12,11 @@ class Student < ApplicationRecord
   mount_uploader :audio, AudioUploader
   # serialize :avatar, JSON
   max_paginates_per 10
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[firstname lastname]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ['grades']
+  end
 end

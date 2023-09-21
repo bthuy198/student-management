@@ -33,6 +33,8 @@ gem "paranoia", "~> 2.2"
 
 gem "letter_opener", group: :development
 
+gem 'ransack'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

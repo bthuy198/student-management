@@ -21,5 +21,11 @@ Rails.application.routes.draw do
         get :destroyed
       end
     end
+    resources :student_classes
+    resources :teachers
   end
+  #
+  # namespace :manager, defaults: { format: 'html' } do
+  #
+  # end
 end

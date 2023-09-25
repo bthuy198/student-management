@@ -1,0 +1,99 @@
+<div class="container">
+  <h1>Student classes List</h1>
+  <div class="row">
+    <div class="col-2">
+      <div id="modalCreate" class="modal hide fade">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Create New Class</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="modal-body">
+                <form method="post" id="createForm">
+                  <ul class="errors"></ul>
+                  <div class="form-group">
+                    <label for="nameCre" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="nameCre">
+                  </div>
+                  <div class="form-group">
+                    <label for="teacherCre" class="form-label">Select Teacher</label>
+                    <select class="form-select" aria-label="Default select example" id="teacherCre">
+                      <option selected value="-1">Open this select menu</option>
+                    </select>
+                  </div>
+                </form>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="btnCreate">Create</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="btnShowCreateModal" >Create</button>
+    </div>
+    <div class="col-2">
+      <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Filter
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Order by name DESC</a></li>
+          <li><a class="dropdown-item" href="#">Order by name ASC </a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col" >#</th>
+      <th scope="col">ID </th>
+      <th scope="col">Class Name</th>
+      <th scope="col">Teacher Name</th>
+      <th scope="col" colspan="4" class="text-center">Action</th>
+    </tr>
+    </thead>
+    <tbody class="teacher-index" id="class-table">
+    </tbody>
+  </table>
+  <br>
+  <div class="pagination justify-content-center">
+  </div>
+  <div id="modalUpdate" class="modal hide fade">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Teacher</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body">
+            <form id="updateForm" enctype="multipart/form-data">
+              <ul class="errors"></ul>
+              <div class="form-group">
+                <label for="nameUp" class="form-label">Name</label>
+                <input type="text" class="form-control" id="nameUp">
+              </div>
+              <div class="form-group">
+                <label for="teacherUp" class="form-label">Select Teacher</label>
+                <input type="text" class="form-control" id="teacherUp">
+              </div>
+            </form>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="btnUpdate">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

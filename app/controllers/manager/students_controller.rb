@@ -5,7 +5,7 @@ module Manager
   class StudentsController < UsersController
     def index
       @q = Student.ransack(params[:q])
-      @students = @q.result.page(params[:page])
+      @students = @q.result(distinct: true).page(params[:page])
       # @students = if params[:key]
       #               Student.without_deleted.where('concat(firstname, " ", lastname) like ?',
       #                                             "%#{params[:key]}%").or(Student.without_deleted.where('concat(lastname, " ", firstname) like ?',

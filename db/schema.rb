@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_022106) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_21_035057) do
   create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -36,6 +36,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_022106) do
     t.index ["student_id"], name: "index_grades_on_student_id"
   end
 
+  create_table "student_classes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "students", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "firstname"
     t.string "phone"
@@ -50,6 +56,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_022106) do
     t.string "email"
     t.date "birthday"
     t.index ["deleted_at"], name: "index_students_on_deleted_at"
+  end
+
+  create_table "teachers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

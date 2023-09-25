@@ -5,3 +5,9 @@ import "jquery"
 import "student"
 import "popper"
 import "bootstrap"
+import 'turbolinks'
+import 'teachers'
+import 'classes'
+
+//= require turbolinks
+//= require_tree.

@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col" >#</th>
+    <th scope="col">ID </th>
+    <th scope="col">Teacher Name</th>
+    <th scope="col" colspan="4" class="text-center">Action</th>
+  </tr>
+  </thead>
+  <tbody class="teacher-index" id="class-table">
+  <% @teachers.each.with_index(1) do |teacher, index| %>
+    <tr>
+      <td><%= index %></td>
+      <td><%= teacher.id %></td>
+      <td><%= teacher.name %></td>
+<!--      <td><%#= link_to 'Show', '#' %></td>-->
+<!--      <td><%#= link_to 'Edit', manager_student_class_path(student_class), data: { turbo_method: :patch }, remote: :true, class: "edit-class edit btn btn-warning" %></td>-->
+<!--      <td><%#= link_to 'Destroy', manager_student_class_path(student_class), data: { turbo_method: :delete, turbo_confirm: "Destroy student '#{student_class.name}'?" }, remote: :true, class: "destroy-class btn btn-danger" %></td>-->
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<!--<br>-->
+<!--<div class="pagination justify-content-center">-->
+  <%#= paginate @teachers %>
+<!--</div>-->

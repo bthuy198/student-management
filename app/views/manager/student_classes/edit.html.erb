@@ -1,10 +1,20 @@
-<h1>Editing student class</h1>
-
-<%= render "form", student_class: @student_class %>
-
-<br>
-
-<div>
-  <%= link_to "Show this student class", @student_class %> |
-  <%= link_to "Back to student classes", student_classes_path %>
+<div class="modal-body">
+  <div class="modal-body">
+    <form id="updateForm" enctype="multipart/form-data">
+      <ul class="errors"></ul>
+      <div class="form-group">
+        <label for="nameUp" class="form-label">Name</label>
+        <input type="text" class="form-control" id="nameUp">
+      </div>
+      <div class="form-group">
+        <label for="teacherUp" class="form-label">Select Teacher</label>
+        <select class="form-select" aria-label="Default select example" id="teacherUp">
+        </select>
+      </div>
+    </form>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary" id="btnUpdate">Update</button>
+    </div>
+  </div>
 </div>

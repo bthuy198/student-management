@@ -2,34 +2,14 @@
   <h1>Student classes List</h1>
   <div class="row">
     <div class="col-2">
-      <div id="modalCreate" class="modal hide fade">
+      <div id="modalCreateClass" class="modal hide fade">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">Create New Class</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-              <div class="modal-body">
-                <form method="post" id="createForm">
-                  <ul class="errors"></ul>
-                  <div class="form-group">
-                    <label for="nameCre" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="nameCre">
-                  </div>
-                  <div class="form-group">
-                    <label for="teacherCre" class="form-label">Select Teacher</label>
-                    <select class="form-select" aria-label="Default select example" id="teacherCre">
-                      <option selected value="-1">Open this select menu</option>
-                    </select>
-                  </div>
-                </form>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" id="btnCreate">Create</button>
-                </div>
-              </div>
-            </div>
+              <%= render 'manager/student_classes/partial/form',content_type: 'text/html', student_class: @student_class, teachers: @teachers %>
           </div>
         </div>
       </div>
@@ -58,42 +38,39 @@
     </tr>
     </thead>
     <tbody class="teacher-index" id="class-table">
+    <%= render 'manager/student_classes/partial/table' %>
     </tbody>
   </table>
   <br>
   <div class="pagination justify-content-center">
   </div>
-  <div id="modalUpdate" class="modal hide fade">
+  <div id="modalUpdateClass" class="modal hide fade">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Edit Teacher</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <div class="modal-body">
-            <form id="updateForm" enctype="multipart/form-data">
-              <ul class="errors"></ul>
-              <div class="form-group">
-                <label for="nameUp" class="form-label">Name</label>
-                <input type="text" class="form-control" id="nameUp">
-              </div>
-              <div class="form-group">
-                <label for="teacherUp" class="form-label">Select Teacher</label>
-                <input type="text" class="form-control" id="teacherUp">
-              </div>
-            </form>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="btnUpdate">Update</button>
-            </div>
-          </div>
-        </div>
+        <%#= render 'manager/student_classes/partial/form_edit', student_class: @student_class %>
       </div>
     </div>
   </div>
 </div>
+<div class="pagination justify-content-center">
+  <%= paginate @student_classes %>
+</div>
+<script type="module">
+  $('#btnShowCreateModal').on('click', () => {
+      $('#modalCreateClass').modal('show');
+  })
 
+  $('.edit').on('click', () => {
+      let classId = $(this).data('id');
+
+      <%= render 'manager/student_classes/partial/form_edit', student_class: @student_class %>
+      $('#modalUpdateClass').modal('show');
+  })
+</script>
 
 
 

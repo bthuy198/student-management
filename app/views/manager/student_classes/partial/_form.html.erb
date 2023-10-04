@@ -1,4 +1,4 @@
-<%= form_for @student_class, url: manager_student_class_path(@student_class), data: { turbo_method: :patch }, remote: true do |form| %>
+<%= form_for @student_class, url: manager_student_classes_path, html: { method: :post }, remote: true do |form| %>
   <div class="modal-body">
     <div class="form-group">
       <%= form.label :name, class: 'form-label' %>
@@ -11,6 +11,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    <%= form.submit "Edit Class", class: "btn btn-primary"%>
+    <%= form.submit "Create New Class", class: "btn btn-primary"%>
   </div>
 <% end %>

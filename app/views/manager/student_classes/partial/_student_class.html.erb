@@ -1,0 +1,8 @@
+<tr id='tr_<%= student_class.id %>'>
+  <td><%= index %></td>
+  <td><%= student_class.id %></td>
+  <td><%= student_class.name %></td>
+  <td><%= link_to 'Show', '#' %></td>
+  <td><%= link_to 'Edit', manager_student_class_path(student_class), data: { turbo_method: :patch }, remote: :true, class: "edit-class edit btn btn-warning" %></td>
+  <td><%= link_to 'Destroy', manager_student_class_path(student_class), data: { turbo_method: :delete, turbo_confirm: "Destroy class '#{student_class.name}'?" }, remote: :true, class: "destroy-class btn btn-danger" %></td>
+</tr>

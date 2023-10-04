@@ -103,8 +103,6 @@ const page_url = 'http://127.0.0.1:3000/manager/teachers'
     page.loadData.findTeacherById(teacherId).then((data) => {
         page.dialogs.elements.nameUp.val(data.name);
         page.dialogs.elements.modalUpdate.modal('show');
-
-
 })
     .catch((error) => {
         console.log(error)

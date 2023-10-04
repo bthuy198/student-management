@@ -1,0 +1,43 @@
+<!-- Tabs navs -->
+<div class="container">
+  <h1>School Management</h1>
+  <%= form_tag schools_path, method: :get, class: "input-group" do |f| %>
+  <div class="row">
+    <div class="col-4">
+      <%= text_field_tag 'q[name_cont]', params[:q].try(:[], :name_cont), placeholder: 'Search by name', class: "form-control rounded" %>
+    </div>
+    <div class="col-4">
+      <%#= f.select :school_id_eq, options_from_collection_for_select(School.all, "id", "name", @search.school_id_eq), include_blank: true %>
+      <%= f.select :schools_id_eq, options_from_collection_for_select(School.all, "id", "name"), include_blank: true %>
+      <%#= f.select :schools_id_eq, options_for_select(@options[:school], selected: handle_key_search("course_eq")),{include_blank: true} %>
+      <select class="form-select" aria-label="Default select example">school
+        <option selected value="0">All school</option>School
+        <%= @schools.each do |school| %>
+        <option value="<%= school.id %>"><%= school.name %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="col-4">
+      <%= submit_tag 'Search', class: "btn btn-success" %>
+    </div>
+  </div>
+  <% end %>
+  <div class="row" style="margin-top: 50px">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Student Class</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Teacher</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <%= render 'schools/partial/student_classes', student_class: @student_classes %>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <%= render 'schools/partial/teachers', teachers: @teachers %>
+    </div>
+  </div>
+  </div>
+</div>

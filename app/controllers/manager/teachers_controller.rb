@@ -14,7 +14,7 @@ module Manager
 
     # GET /teachers/1 or /teachers/1.json
     def show
-      @teacher = set_teacher
+      @teacher = Teacher.find(params[:id])
       respond_to do |format|
         format.json { render json: @teacher }
       end

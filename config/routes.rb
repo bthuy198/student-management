@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :schools
   devise_for :admins
   devise_for :users
 
   # root 'manager/students#index'
   get 'users', to: 'users#index'
   get 'admins', to: 'admins#index'
+  get 'schools/search', to: 'schools#search'
 
   namespace :manager do
     devise_for :users
@@ -17,15 +19,10 @@ Rails.application.routes.draw do
         delete :really_delete
       end
       collection do
-        # match 'search' => 'students#search', via: %i[get post], as: :search
         get :destroyed
       end
     end
     resources :student_classes
     resources :teachers
   end
-  #
-  # namespace :manager, defaults: { format: 'html' } do
-  #
-  # end
 end
